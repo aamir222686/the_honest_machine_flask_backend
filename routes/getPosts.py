@@ -29,3 +29,20 @@ def getPostsByCount(count):
     except Exception as e:
         print("ERROR ::: ", e)
         return []
+    
+
+def getPostsById(id):
+    try:
+        docs = []
+        cursor = col.find({"_id": str(id)})
+        for document in cursor:
+            docs.append(document)
+
+        if len(docs):
+            return docs
+        else:
+            return []
+
+    except Exception as e:
+        print("ERROR ::: ", e)
+        return []

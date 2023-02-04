@@ -9,7 +9,7 @@ sys.path.append(fpath)
 from routes.createNewPost import createPost
 from routes.updatePost import updatePost
 from routes.deletePost import deletePost
-from routes.getPosts import getPostsByCount
+from routes.getPosts import getPostsByCount, getPostsById
 from routes.updateViewCount import updateViewCount
 
 # Create ref to fastapi with app
@@ -49,6 +49,12 @@ async def root(data: Request):
     else:
         return {"status": 0}
     
+
+@app.get("/getPostsById")
+async def root(id):
+    res = getPostsById(id)
+    return res
+
 
 @app.get("/getPostsByCount")
 async def root(count):
