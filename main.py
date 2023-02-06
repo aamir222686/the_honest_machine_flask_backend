@@ -20,7 +20,7 @@ async def root():
     return "The App is alive....."
 
 
-@app.post("/createNewPost/")
+@app.post("/createNewPost")
 async def root(data: Request):
     req_info = await data.json()
     res = createPost(req_info)
@@ -30,7 +30,7 @@ async def root(data: Request):
         return {"status": 0}
     
 
-@app.post("/updatePost/")
+@app.post("/updatePost")
 async def root(data: Request):
     req_info = await data.json()
     res = updatePost(req_info)
@@ -40,7 +40,7 @@ async def root(data: Request):
         return {"status": 0}
     
 
-@app.post("/deletePost/")
+@app.post("/deletePost")
 async def root(data: Request):
     req_info = await data.json()
     res = deletePost(req_info)
@@ -62,7 +62,7 @@ async def root(count):
     return res
 
 
-@app.post("/updateViewCount/")
+@app.post("/updateViewCount")
 async def root(data: Request):
     req_info = await data.json()
     res = updateViewCount(req_info)
