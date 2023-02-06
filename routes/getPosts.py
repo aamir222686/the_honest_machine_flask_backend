@@ -6,15 +6,12 @@ import pymongo
 load_dotenv()
 
 mongoConnString = os.getenv('MONGO_CONN_STR')
-
-client = pymongo.MongoClient(mongoConnString)
-db = client["posts"]
-col = db["posts"]
-
-
 # Create post method
 
 def getPostsByCount(count):
+    client = pymongo.MongoClient(mongoConnString)
+    db = client["posts"]
+    col = db["posts"]
     try:
         docs = []
         cursor = col.find({}).limit(int(count)).sort("date_added", -1)
@@ -22,16 +19,24 @@ def getPostsByCount(count):
             docs.append(document)
 
         if len(docs):
+            
             return docs
         else:
+            
             return []
 
     except Exception as e:
+        
         print("ERROR ::: ", e)
         return []
+    finally:
+        client.close()
     
 
 def getPostsById(id):
+    client = pymongo.MongoClient(mongoConnString)
+    db = client["posts"]
+    col = db["posts"]
     try:
         docs = []
         cursor = col.find({"_id": str(id)})
@@ -46,3 +51,5 @@ def getPostsById(id):
     except Exception as e:
         print("ERROR ::: ", e)
         return []
+    finally:
+        client.close()
