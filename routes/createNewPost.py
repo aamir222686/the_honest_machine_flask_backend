@@ -15,7 +15,7 @@ def createPost(req_info):
     db = client["posts"]
     col = db["posts"]
     try:
-        req_info["_id"] = str(uuid.uuid4().split("-")[0])
+        req_info["_id"] = str(uuid.uuid4()).split("-")[0]
         req_info["num_of_views"] = int(req_info["num_of_views"])
         req_info["date_added"] =  datetime.datetime.fromtimestamp(req_info["date_added"])
         res = col.insert_one(req_info)
