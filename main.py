@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import sys
 import os
@@ -14,6 +15,13 @@ from routes.updateViewCount import updateViewCount
 
 # Create ref to fastapi with app
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:3000'],
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 @app.get("/")
 async def root():
