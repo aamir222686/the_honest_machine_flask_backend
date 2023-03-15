@@ -53,3 +53,25 @@ def getPostsById(id):
         return []
     finally:
         client.close()
+
+
+def getPostsByCategory(category):
+    client = pymongo.MongoClient(mongoConnString)
+    db = client["posts"]
+    col = db["posts"]
+    try:
+        docs = []
+        cursor = col.find({"category": str(category)})
+        for document in cursor:
+            docs.append(document)
+
+        if len(docs):
+            return docs
+        else:
+            return []
+
+    except Exception as e:
+        print("ERROR ::: ", e)
+        return []
+    finally:
+        client.close()
