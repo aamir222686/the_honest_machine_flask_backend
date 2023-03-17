@@ -61,7 +61,7 @@ def getPostsByCategory(category):
     col = db["posts"]
     try:
         docs = []
-        cursor = col.find({"category": str(category)})
+        cursor = col.find({"category": str(category)}).sort("date_added", -1)
         for document in cursor:
             docs.append(document)
 
